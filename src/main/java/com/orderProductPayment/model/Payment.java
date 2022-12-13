@@ -1,8 +1,5 @@
 package com.orderProductPayment.model;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.boot.autoconfigure.web.WebProperties;
-
 import javax.persistence.*;
 
 @Entity

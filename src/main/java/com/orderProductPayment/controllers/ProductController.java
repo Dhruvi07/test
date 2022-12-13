@@ -32,9 +32,8 @@ public class ProductController {
         return ps.updateProduct(id,p);
     }
 
-
     @DeleteMapping(value = "/delete/{id}")
-    String deleteProduct(@PathVariable Integer id , @RequestBody Product p){
-        return ps.deleteProduct(id);
+    void deleteProduct(@PathVariable Integer id ){
+        ps.deleteProduct(id);
     }
 }

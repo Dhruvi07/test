@@ -13,7 +13,7 @@ This application is based on the entities ```Order - Product - Payment``` .
 
 Here are some endpoints you can call:
 
-### Create a Order
+### Create an Order
 ```
 POST http://localhost:8080/app/order/create
 Content-Type: raw/json
@@ -21,7 +21,7 @@ Content-Type: raw/json
     "name": "Dhruvi"
 }
 ```
-### Get a Order
+### Get an Order
 ```
 GET http://localhost:8080/app/order/1
 ```
@@ -62,16 +62,6 @@ Content-Type: raw/json
 }
 ```
 
-
-### Add a new Product to Order
-```
-PUT http://localhost:8080/app/order/1/product
-Content-Type: raw/json
-{
-            "name": "Suitcase",
-            "price": 5000
-}
-```
 ### Add an existing Product to Order
 ```
 GET http://localhost:8080/app/order/1/product/1

@@ -1,6 +1,4 @@
 package com.orderProductPayment.model;
-
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -72,12 +70,15 @@ public class Order {
         this.products.add(b) ;
     }
     public void removeProducts(Integer productId) {
+        Product temp = null;
         if(!this.products.isEmpty()){
             for (Product p : this.products) {
                 if(p.getId() == productId){
-                    this.products.remove(p);
+                    temp=p;
                 }
             }
+            if(temp!=null)
+            this.products.remove(temp);
         }
     }
 }

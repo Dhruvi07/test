@@ -27,23 +27,17 @@ OrderService {
     public Iterable<OrderDto> allOrders(){
         Set<OrderDto> so = new HashSet<>();
         List<Order> lo = or.findAll();
-        for (Order r:lo ) {
-            so.add(utility(r));
+        if(!lo.isEmpty()) {
+            for (Order ord : lo) {
+                so.add(utility(ord));
+            }
         }
         return so;
     }
 
     public OrderDto oneOrder(Integer id){
-        Order u = or.findById(id).orElse(new Order());
-        return utility(u);
-    }
-
-    public OrderDto addProduct(Integer orderId, Product p){
-        Order order = or.findById(orderId).orElse(new Order());
-        p = pr.save(p);
-        order.addProduct(p);
-        or.save(order);
-        return utility(order);
+        Order ord = or.findById(id).orElse(new Order());
+        return utility(ord);
     }
 
     public OrderDto insertProduct(Integer orderId, Integer productId) {
@@ -54,7 +48,7 @@ OrderService {
         return utility(o);
     }
 
-    public OrderDto deleteOrder(Integer orderId, Integer productId) {
+    public OrderDto deleteFromOrder(Integer orderId, Integer productId) {
         Order o = or.findById(orderId).orElse(new Order());
         o.removeProducts(productId);
         or.save(o);
@@ -62,19 +56,17 @@ OrderService {
     }
 
 
-    public static OrderDto utility(Order u){
+    public static OrderDto utility(Order o){
         OrderDto od = new OrderDto();
-        od.orderId = u.getOrderId();
-        od.name = u.getName() ;
-        if(u.getPayment()!=null) {
-            od.payment.paymentId = u.getPayment().getPaymentId();
-            od.payment.status = u.getPayment().getStatus();
+        od.orderId = o.getOrderId();
+        od.name = o.getName() ;
+        if(o.getPayment()!=null) {
+            od.payment.paymentId = o.getPayment().getPaymentId();
+            od.payment.status = o.getPayment().getStatus();
         }
-
-        for (Product p: u.getProducts()) {
+        for (Product p: o.getProducts()) {
             od.products.add( ProductService.utility(p) );
         }
-
         return od ;
     }
 

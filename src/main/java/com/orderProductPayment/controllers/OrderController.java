@@ -1,6 +1,5 @@
 package com.orderProductPayment.controllers;
 import com.orderProductPayment.dtos.OrderDto;
-import com.orderProductPayment.model.Product;
 import com.orderProductPayment.model.Order;
 import com.orderProductPayment.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,8 @@ public class OrderController {
     OrderService os;
 
     @PostMapping(value = "/create")
-    OrderDto createOrder(@RequestBody Order u){
-        return os.createOrder(u);
+    OrderDto createOrder(@RequestBody Order o){
+        return os.createOrder(o);
     }
 
     @GetMapping(value = "/all")
@@ -27,10 +26,6 @@ public class OrderController {
         return os.oneOrder(id);
     }
 
-    @PutMapping(value = "{orderId}/product")
-    OrderDto addProduct(@PathVariable Integer orderId , @RequestBody Product b ){
-        return os.addProduct(orderId,b);
-    }
 
     @GetMapping(value= "/{orderId}/product/{productId}")
     OrderDto insertProduct(@PathVariable Integer orderId , @PathVariable Integer productId ){
@@ -38,8 +33,8 @@ public class OrderController {
     }
 
     @DeleteMapping(value = "{orderId}/product/{productId}")
-    OrderDto deleteProduct(@PathVariable Integer orderId , @PathVariable Integer productId ){
-        return os.deleteOrder(orderId,productId);
+    OrderDto deleteProductFromOrder(@PathVariable Integer orderId , @PathVariable Integer productId ){
+        return os.deleteFromOrder(orderId,productId);
     }
 
 }
